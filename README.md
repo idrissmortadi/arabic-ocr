@@ -9,5 +9,6 @@ Cloned from https://github.com/Anna868/Arabic-Handwritten-OCR
         - It's a complicated problem due to the cursive nature of test.
         - Search for a way to split/segment image to find boundaries of characters.
         - Found "Cursive Overlapped Character Segmentation: An Enhanced Approach" article.
+        - Use a different core-zone concept: find the horizontal band (10px high) that has the most pixels.
     - [ ] Improve refactoring more
     

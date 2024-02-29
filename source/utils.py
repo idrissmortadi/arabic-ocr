@@ -52,11 +52,11 @@ def square_crop(image, resize):
 
     # Create new image with largest dimension
     if h_dim["size"] > v_dim["size"]:
-        cropped_image = torch.zeros(max(h_dim["size"]+1, 28),
-                                    max(h_dim["size"]+1, 28))
+        cropped_image = torch.zeros(max(h_dim["size"]+1, resize.size[0]),
+                                    max(h_dim["size"]+1, resize.size[1]))
     else:
-        cropped_image = torch.zeros(max(v_dim["size"]+1, 28),
-                                    max(v_dim["size"]+1, 28))
+        cropped_image = torch.zeros(max(v_dim["size"]+1, resize.size[0]),
+                                    max(v_dim["size"]+1, resize.size[1]))
 
     # Cut the image and put it in the new cropped image then resize
     height, width = cropped_image.shape

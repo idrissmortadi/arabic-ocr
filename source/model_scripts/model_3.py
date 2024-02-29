@@ -3,17 +3,17 @@ import torch.optim as optim
 
 
 class BenchmarkCnn2(nn.Module):
-    def __init__(self, num_classes):
+    def __init__(self, image_size, num_classes):
         super(BenchmarkCnn2, self).__init__()
         self.name = "benchmark_cnn"
         self.features = nn.Sequential(
-            nn.Conv2d(1, 8, kernel_size=8, stride=1, padding=1),
+            nn.Conv2d(1, 32, kernel_size=8, stride=1, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=4, stride=2),
-            nn.Conv2d(8, 16, kernel_size=4, stride=1, padding=1),
+            nn.Conv2d(32, 32, kernel_size=4, stride=1, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(16, 16, kernel_size=2, stride=1, padding=1),
+            nn.Conv2d(32, 16, kernel_size=2, stride=1, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2)
         )

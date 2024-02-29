@@ -22,13 +22,13 @@ train_loader, val_loader, test_loader = create_data_loader(custom_dataset)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 num_classes = len(custom_dataset.unique_targets)
-model = HandwritingRecognizer1(64, 64, num_classes).to(device)
+model = BenchmarkCnn2(64, num_classes).to(device)
 optimizer, lr_schedule = model.configure_optimizers()
 
-criterion = nn.CrossEntropyLoss()
+criterion = nn.MSELoss()
 
 # Step 3: Train your model
-num_epochs = 32
+num_epochs = 4
 
 for epoch in range(num_epochs):
     for batch_idx, (data, targets) in enumerate(train_loader):
@@ -39,7 +39,8 @@ for epoch in range(num_epochs):
         # print(model.features(data).shape)
 
         outputs = model(data)
-        loss = criterion(outputs, targets)
+        print(data.shape)
+        loss = criterion(outputs, targets.float())
 
         # Backward pass and optimization
         optimizer.zero_grad()

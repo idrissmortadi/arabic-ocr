@@ -2,6 +2,8 @@ from torch.utils.data import Dataset
 from utils import get_unique_targets, square_crop
 import cv2
 import os
+from torch.nn.functional import one_hot
+import torch
 
 
 class CustomDataset(Dataset):
@@ -11,6 +13,7 @@ class CustomDataset(Dataset):
         self.image_names = os.listdir(images_folder)
         self.transform = transform
         self.unique_targets = get_unique_targets(labels_folder)
+        self.one_hot_targets = one_hot(torch.arange(len(self.unique_targets)))
 
     def __len__(self):
         return len(self.image_names)
@@ -37,4 +40,5 @@ class CustomDataset(Dataset):
         # Add channel dimension for grayscale image
         image_tensor = image_tensor.unsqueeze(0)
 
-        return (image_tensor, self.unique_targets.index(label.strip()))
+        label_id = self.unique_targets.index(label.strip()) 
+        return (image_tensor, self.one_hot_targets[label_id])
